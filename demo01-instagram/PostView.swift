@@ -9,116 +9,180 @@ import SwiftUI
 
 struct PostView: View {
     var body: some View {
-        VStack(alignment: .leading) {
+        HeaderBar(username: "chevychiem")
+
+        Post(
+            username: "chevychiem",
+            profilePicture: .chevy,
+            postPicture: .IMG_6028,
+            likes: "100M",
+            comments: "99M",
+            reposts: "5M",
+            shares: "58M",
+            caption: "hey lol",
+            timeStamp: "30 seconds ago"
+        )
+
+        NavigationBar()
+    }
+
+    struct HeaderBar: View {
+        var username: String
+
+        var body: some View {
             HStack {
                 Image(systemName: "chevron.backward")
                     .font(.title2)
+
                 Spacer()
-                VStack() {
+
+                VStack {
                     Text("Posts")
                         .bold()
-                    Text("chevychiem")
+                    Text(username)
                         .font(.subheadline)
                 }
-                
-                Spacer().frame(maxWidth: 133)
+
+                Spacer().frame(maxWidth: 139)
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 20)
             Spacer().frame(maxHeight: 75)
-            
-            HStack {
-                Image("Image")
+        }
+    }
+
+    struct Post: View {
+        var username: String
+        var profilePicture: ImageResource
+        var postPicture: ImageResource
+        var likes: String
+        var comments: String
+        var reposts: String
+        var shares: String
+        var caption: String
+        var timeStamp: String
+
+        var body: some View {
+            VStack(alignment: .leading) {
+                HStack {
+                    Image(profilePicture)
+                        .resizable()
+                        .frame(width: 35, height: 35)
+                        .clipShape(Circle())
+
+                    Text(username)
+                        .font(.headline)
+                    Spacer()
+                    Image(systemName: "ellipsis")
+                }
+                .padding(.horizontal, 8)
+
+                Image(postPicture)
                     .resizable()
-                    .frame(width: 35, height: 35)
-                    .clipShape(Circle())
-                Text("chevychiem")
-                    .font(.headline)
+                    .aspectRatio(1, contentMode: .fit)
+                    .padding(.horizontal, -20)
+
+                Spacer().frame(maxHeight: 10)
+
+                HStack {
+                    Image(systemName: "heart.fill")
+                        .foregroundStyle(Color(.red))
+                        .font(.title2)
+                        .fontWeight(.semibold)
+
+                    Text(likes)
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
+
+                    Image(systemName: "bubble")
+                        .fontWeight(.semibold)
+                        .font(.title2)
+
+                    Text(comments)
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
+
+                    Image(systemName: "repeat")
+                        .fontWeight(.semibold)
+                        .font(.title2)
+
+                    Text(reposts)
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
+
+                    Image(systemName: "paperplane")
+                        .fontWeight(.semibold)
+                        .font(.title2)
+
+                    Text(shares)
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
+
+                    Spacer()
+
+                    Image(systemName: "bookmark.fill")
+                        .fontWeight(.semibold)
+                        .font(.title2)
+                }
+
+                .padding(.horizontal, 8)
+
+                Spacer().frame(maxHeight: 5)
+
+                HStack {
+                    Text(username)
+                        .font(.headline)
+
+                    Text(caption)
+                }.padding(.horizontal, 8)
+
+                Spacer().frame(maxHeight: 5)
+
+                Text(timeStamp)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal, 8)
+
                 Spacer()
-                Image(systemName: "ellipsis")
             }
-            Image("IMG_6028")
-                .resizable()
-                .aspectRatio(1, contentMode: .fit)
-                .padding(.horizontal, -16)
-            Spacer().frame(maxHeight: 10)
-            HStack {
-                Image(systemName: "heart.fill")
-                    .foregroundStyle(Color(.red))
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                Text("100.3M")
-                    .fontWeight(.semibold)
-                    .font(.subheadline)
-                Image(systemName: "bubble")
-                    .fontWeight(.semibold)
-                    .font(.title2)
-                Text("99.2M")
-                    .fontWeight(.semibold)
-                    .font(.subheadline)
-                Image(systemName: "repeat")
-                    .fontWeight(.semibold)
-                    .font(.title2)
-                Text("5.9M")
-                    .fontWeight(.semibold)
-                    .font(.subheadline)
-                Image(systemName: "paperplane")
-                    .fontWeight(.semibold)
-                    .font(.title2)
-                Text("58M")
-                    .fontWeight(.semibold)
-                    .font(.subheadline)
-                Spacer()
-                Image(systemName: "bookmark.fill")
-                    .fontWeight(.semibold)
-                    .font(.title2)
-            }
-            
-            Spacer().frame(maxHeight: 5)
-            HStack {
-                Text("chevychiem")
-                    .font(.headline)
-                Text("hey lol")
-            }
-            Spacer().frame(maxHeight: 5)
-            Text("30 seconds ago")
-                .font(.caption)
-                .foregroundColor(.secondary)
-        } .padding(10)
-        Spacer()
-        
-        HStack() {
+        }
+    }
+
+}
+
+struct NavigationBar: View {
+    var body: some View {
+        HStack {
             Image(systemName: "house")
                 .font(.title2)
                 .fontWeight(.semibold)
-            
+
             Spacer()
-            
+
             Image(systemName: "magnifyingglass")
                 .font(.title2)
                 .fontWeight(.semibold)
-            
+
             Spacer()
-            
+
             Image(systemName: "plus.app")
                 .font(.title2)
                 .fontWeight(.semibold)
-            
+
             Spacer()
-            
+
             Image(systemName: "play.rectangle")
                 .font(.title2)
                 .fontWeight(.semibold)
-            
+
             Spacer()
-            
+
             Image(systemName: "person.circle.fill")
                 .font(.title2)
                 .fontWeight(.semibold)
         }
         .padding(.horizontal, 24)
-        .padding(.bottom, 8)
+        .padding(.bottom, 10)
     }
-    
 }
 
 #Preview {
